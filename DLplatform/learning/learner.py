@@ -86,7 +86,13 @@ class Learner(baseClass):
 
         self.info("Stopping criterion was met, sending suicide note to coordinator")
         self._communicator.sendDeregistration(self._identifier, self.getParameters())
+        self.safeModel()
         sys.exit()
+
+
+
+    def safeModel(self):
+        raise NotImplementedError
         
     def setModel(self, param : Parameters, flags: dict):
         '''

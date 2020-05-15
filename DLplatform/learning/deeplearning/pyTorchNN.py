@@ -20,6 +20,19 @@ class PyTorchNN(IncrementalLearner):
     def setCore(self, network):
         self._core = network
 
+    def getModel(self):
+        return self._referenceModel
+
+    def getIdentifier(self):
+        return self._identifier
+
+    def safeModel(self):
+        model = self._core
+        identifier = self.getIdentifier()
+        path = './' + str(identifier) + 'model.pth'
+        torch.save(model.state_dict(), path)
+        print('model saved')
+
     def setModel(self, param: PyTorchNNParameters, setReference: bool):
         super(PyTorchNN, self).setModel(param, setReference)
         
